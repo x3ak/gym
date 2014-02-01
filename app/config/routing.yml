@@ -1,0 +1,4 @@
+# import routes from a controller directory
+post:
+    resource: "@GymBundle/Controller/UsersController.php"
+    type:     annotation

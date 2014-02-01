@@ -1,0 +1,24 @@
+{
+    "name": "gym",
+    "version": "0.0.0",
+    "description": "System for GYM management",
+    "main": "Gruntfile.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://x3ak@github.com/x3ak/gym.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/x3ak/gym/issues"
+    },
+    "homepage": "https://github.com/x3ak/gym",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-less": "~0.5.0",
+        "grunt-contrib-watch": "~0.4.0"
+    }
+}
