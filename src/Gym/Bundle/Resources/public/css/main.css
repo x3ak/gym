@@ -26,16 +26,19 @@ body {
   padding: 0;
   margin: 0;
 }
-body .container header ul {
+h3 {
+  margin: 0;
+}
+.container header ul {
   padding: 0;
   margin: 0;
   display: flex;
   border-bottom: 2px solid #cc0000;
 }
-body .container header ul li {
+.container header ul li {
   list-style: none;
 }
-body .container header ul li a {
+.container header ul li a {
   text-decoration: none;
   padding: 2px 5px;
   display: block;

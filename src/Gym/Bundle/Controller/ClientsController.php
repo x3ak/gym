@@ -9,6 +9,7 @@ namespace Gym\Bundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -24,18 +25,27 @@ class ClientsController extends Controller
     }
 
     /**
-     * @Route("/list", name="clients_list")
+     * @Route("/today/{page}", name="clients_today", defaults={"page":1}, requirements={"page":"\d+"})
      * @Template
      */
-    public function listAction()
+    public function todayAction($page)
     {
-        $list = $this->getService()->getTodayList(1,1);
-//        $list = $this->getRepository()->findBy([], ['id' => 'desc']);
-        return ['clients' => $list];
+        return [
+            'clients' => $this->getService()->getListByDate($page, new \DateTime(), new \DateTime()),
+        ];
     }
 
-    public function todayAction()
+    /**
+     * @param $page
+     * @param \DateTime $week
+     * @return array
+     * @Route("/week/{page}/{week}", name="clients_week", defaults={"page":1}, requirements={"page":"\d+"})
+     * @ParamConverter("week", options={"optional":true})
+     * @Template
+     */
+    public function weekAction($page, \DateTime $week)
     {
 
+        return [];
     }
 } 

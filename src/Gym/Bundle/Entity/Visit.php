@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Visit
  *
- * @ORM\Table(name="visit", indexes={@ORM\Index(name="fk_visit_client_idx", columns={"client_id"}), @ORM\Index(name="fk_visit_subscription1_idx", columns={"subscription_id"})})
+ * @ORM\Table(name="visit", indexes={@ORM\Index(name="fk_visit_client_idx", columns={"client_id"})})
  * @ORM\Entity
  */
 class Visit
@@ -43,7 +43,7 @@ class Visit
     private $exit;
 
     /**
-     * @var \Client
+     * @var Client
      *
      * @ORM\ManyToOne(targetEntity="Client")
      * @ORM\JoinColumns({
@@ -51,16 +51,6 @@ class Visit
      * })
      */
     private $client;
-
-    /**
-     * @var \Subscription
-     *
-     * @ORM\ManyToOne(targetEntity="Subscription")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subscription_id", referencedColumnName="id")
-     * })
-     */
-    private $subscription;
 
 
 }

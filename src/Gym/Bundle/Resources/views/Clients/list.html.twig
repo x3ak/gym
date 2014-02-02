@@ -1,6 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
+    <div class="filter">
+        {% block filter %}
+        {% endblock %}
+    </div>
+
+    {% block listing %}
     <table class="list">
         <thead>
             <tr>
@@ -19,4 +25,8 @@
         {% endfor %}
 
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(clients) }}
+    </div>
+    {% endblock %}
 {% endblock %}

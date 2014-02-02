@@ -80,6 +80,16 @@ knp_paginator:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
 services:
+    gym.twig.fullname_extension:
+        class: Gym\Bundle\Twig\FullnameExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
     # Repositories
     gym.repository.client:
         class: Gym\Bundle\Entity\ClientRepository
@@ -87,11 +97,7 @@ services:
         factory_method: getRepository
         arguments: ["GymBundle:Client"]
 
-    gym.twig.fullname_extension:
-        class: Gym\Bundle\Twig\FullnameExtension
-        tags:
-            - { name: twig.extension }
-
+    # services
     gym.service.clients:
         class: Gym\Bundle\Service\ClientsService
-        arguments: ["@gym.repository.client", "@knp_paginator"]
+        arguments: ["@gym.repository.client", "@knp_paginator", %client_page_size%]

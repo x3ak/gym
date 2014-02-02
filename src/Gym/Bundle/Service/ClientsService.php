@@ -23,15 +23,34 @@ class ClientsService
      */
     protected $paginator;
 
-    public function __construct(ClientRepository $clientRepository, Paginator $paginator)
+    /**
+     * @var int
+     */
+    protected $pageSize;
+
+    public function __construct(ClientRepository $clientRepository, Paginator $paginator, $pageSize)
     {
         $this->clientRepository = $clientRepository;
         $this->paginator = $paginator;
+        $this->pageSize = $pageSize;
     }
 
-    public function getTodayList($page, $pageSize)
+    /**
+     * @param $page
+     * @param \DateTime $start
+     * @param \DateTime|null $end
+     * @return \Knp\Component\Pager\Pagination\PaginationInterface
+     */
+    public function getListByDate($page, \DateTime $start, \DateTime $end = null)
     {
-        return $this->clientRepository->getToadyQuery()->getQuery()->execute();
+        return $this->paginator->paginate(
+            $this->clientRepository->getByVisitDateQuery(
+                $start,
+                $end === null ? $start : $end
+            )->getQuery(),
+            $page,
+            $this->pageSize
+        );
     }
 
 } 
