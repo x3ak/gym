@@ -29,7 +29,7 @@ class UserActivity
     private $date;
 
     /**
-     * @var Visit
+     * @var \Visit
      *
      * @ORM\ManyToOne(targetEntity="Visit")
      * @ORM\JoinColumns({
@@ -39,7 +39,7 @@ class UserActivity
     private $visit;
 
     /**
-     * @var Client
+     * @var \Client
      *
      * @ORM\ManyToOne(targetEntity="Client")
      * @ORM\JoinColumns({
@@ -49,7 +49,7 @@ class UserActivity
     private $client;
 
     /**
-     * @var Subscription
+     * @var \Subscription
      *
      * @ORM\ManyToOne(targetEntity="Subscription")
      * @ORM\JoinColumns({
@@ -59,7 +59,7 @@ class UserActivity
     private $subscription;
 
     /**
-     * @var SubscriptionType
+     * @var \SubscriptionType
      *
      * @ORM\ManyToOne(targetEntity="SubscriptionType")
      * @ORM\JoinColumns({
@@ -69,7 +69,7 @@ class UserActivity
     private $subscriptionType;
 
     /**
-     * @var User
+     * @var \User
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
@@ -79,7 +79,7 @@ class UserActivity
     private $user;
 
     /**
-     * @var ActivityType
+     * @var \ActivityType
      *
      * @ORM\ManyToOne(targetEntity="ActivityType")
      * @ORM\JoinColumns({

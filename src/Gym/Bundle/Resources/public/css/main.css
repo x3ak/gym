@@ -1,6 +1,42 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+table.list {
+  border-collapse: collapse;
+  width: 100%;
+}
+table.list thead tr th {
+  border-bottom: 1px solid silver;
+  line-height: 30px;
+}
+table.list thead tr th.code {
+  width: 100px;
+}
+table.list tbody tr:nth-child(odd) td {
+  background-color: #c1c1c1;
+}
+table.list tbody tr td {
+  border-bottom: 1px solid silver;
+  line-height: 30px;
+}
+a {
+  color: #1a1a1a;
+}
 body {
   font-family: 'Roboto', sans-serif;
-  color: red;
+  color: #1a1a1a;
   padding: 0;
   margin: 0;
+}
+body .container header ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  border-bottom: 2px solid #cc0000;
+}
+body .container header ul li {
+  list-style: none;
+}
+body .container header ul li a {
+  text-decoration: none;
+  padding: 2px 5px;
+  display: block;
 }

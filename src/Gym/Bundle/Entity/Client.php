@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Client
  *
- * @ORM\Table(name="client", uniqueConstraints={@ORM\UniqueConstraint(name="code_UNIQUE", columns={"code"})})
- * @ORM\Entity
+ * @ORM\Table(name="client", uniqueConstraints={@ORM\UniqueConstraint(name="code_UNIQUE", columns={"code"})}, indexes={@ORM\Index(name="fk_client_subscription1_idx", columns={"subscription_id"})})
+ * @ORM\Entity(repositoryClass="Gym\Bundle\Entity\ClientRepository")
  */
 class Client
 {
@@ -31,16 +31,16 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=64, nullable=false)
+     * @ORM\Column(name="first_name", type="string", length=64, nullable=false)
      */
-    private $firstname;
+    private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=64, nullable=false)
+     * @ORM\Column(name="last_name", type="string", length=64, nullable=false)
      */
-    private $lastname;
+    private $lastName;
 
     /**
      * @var \DateTime
@@ -63,5 +63,44 @@ class Client
      */
     private $phone;
 
+    /**
+     * @var Subscription
+     *
+     * @ORM\ManyToOne(targetEntity="Subscription")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="subscription_id", referencedColumnName="id")
+     * })
+     */
+    private $subscription;
 
+    /**
+     * @var Visit[]
+     *
+     * @ORM\OneToMany(targetEntity="Visit", mappedBy="client")
+     */
+    private $visits;
+
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @return Subscription
+     */
+    public function getSubscription()
+    {
+        return $this->subscription;
+    }
 }

@@ -1,0 +1,18 @@
+table.list {
+  border-collapse: collapse;
+  width: 100%;
+}
+table.list thead tr th {
+  border-bottom: 1px solid silver;
+  line-height: 30px;
+}
+table.list thead tr th.code {
+  width: 100px;
+}
+table.list tbody tr:nth-child(odd) td {
+  background-color: #c1c1c1;
+}
+table.list tbody tr td {
+  border-bottom: 1px solid silver;
+  line-height: 30px;
+}

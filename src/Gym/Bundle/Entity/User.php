@@ -19,25 +19,21 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="login", type="string", length=45, nullable=false)
      */
-    protected $login;
+    private $login;
 
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=45, nullable=false)
      */
-    protected $password;
+    private $password;
 
-    public function getLogin()
-    {
-        return $this->login;
-    }
 
 }

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link href='/font-awesome/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
         {% stylesheets '@GymBundle/Resources/public/css/main.css' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -12,7 +12,23 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <div class="container">
+            {% block header %}
+                <header>
+                    <ul class="navigation">
+                        <li><a href="{{ path('dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+                        <li><a href="{{ path('clients_list') }}">Clients</a></li>
+                    </ul>
+                </header>
+            {% endblock %}
+            {% block content %}
+            {% endblock %}
+            {% block footer %}
+            {% endblock %}
+            </div>
+        {% endblock %}
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

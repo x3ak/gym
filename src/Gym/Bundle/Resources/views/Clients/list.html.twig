@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <table class="list">
+        <thead>
+            <tr>
+                <th class="code">Code</th>
+                <th>Name</th>
+                <th>Other stuff</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.code }}</td>
+            <td>{{ client|fullname }}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

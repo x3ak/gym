@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Subscription
  *
- * @ORM\Table(name="subscription", indexes={@ORM\Index(name="fk_subscription_client1_idx", columns={"client_id"}), @ORM\Index(name="fk_subscription_subscription_type1_idx", columns={"subscription_type_id"})})
+ * @ORM\Table(name="subscription", indexes={@ORM\Index(name="fk_subscription_subscription_type1_idx", columns={"subscription_type_id"}), @ORM\Index(name="fk_subscription_client1_idx", columns={"client_id"})})
  * @ORM\Entity
  */
 class Subscription
@@ -22,17 +22,28 @@ class Subscription
     private $id;
 
     /**
-     * @var Client
+     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Client")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="price", type="smallint", nullable=false)
      */
-    private $client;
+    private $price;
 
     /**
-     * @var SubscriptionType
+     * @var \DateTime
+     *
+     * @ORM\Column(name="start_date", type="date", nullable=false)
+     */
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="expire_date", type="date", nullable=false)
+     */
+    private $expireDate;
+
+    /**
+     * @var \SubscriptionType
      *
      * @ORM\ManyToOne(targetEntity="SubscriptionType")
      * @ORM\JoinColumns({
@@ -40,6 +51,16 @@ class Subscription
      * })
      */
     private $subscriptionType;
+
+    /**
+     * @var \Client
+     *
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * })
+     */
+    private $client;
 
 
 }

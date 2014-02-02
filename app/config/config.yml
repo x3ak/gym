@@ -67,3 +67,31 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+services:
+    # Repositories
+    gym.repository.client:
+        class: Gym\Bundle\Entity\ClientRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: ["GymBundle:Client"]
+
+    gym.twig.fullname_extension:
+        class: Gym\Bundle\Twig\FullnameExtension
+        tags:
+            - { name: twig.extension }
+
+    gym.service.clients:
+        class: Gym\Bundle\Service\ClientsService
+        arguments: ["@gym.repository.client", "@knp_paginator"]
