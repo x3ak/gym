@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="subscription", indexes={@ORM\Index(name="fk_subscription_subscription_type1_idx", columns={"subscription_type_id"}), @ORM\Index(name="fk_subscription_client1_idx", columns={"client_id"})})
  * @ORM\Entity
+ * )
  */
 class Subscription
 {
@@ -47,7 +48,7 @@ class Subscription
      *
      * @ORM\ManyToOne(targetEntity="SubscriptionType")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subscription_type_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="subscription_type_id", referencedColumnName="id", nullable=false)
      * })
      */
     private $subscriptionType;
@@ -57,7 +58,7 @@ class Subscription
      *
      * @ORM\ManyToOne(targetEntity="Client", inversedBy="subscriptions")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
      * })
      */
     private $client;

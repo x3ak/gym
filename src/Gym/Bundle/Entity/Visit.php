@@ -47,7 +47,7 @@ class Visit
      *
      * @ORM\ManyToOne(targetEntity="Client", inversedBy="visits")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
      * })
      */
     private $client;
