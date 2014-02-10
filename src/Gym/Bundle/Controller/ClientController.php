@@ -30,15 +30,15 @@ class ClientController extends Controller
     }
 
     /**
-     * @Route("/{id}/visits", name="client_visits")
+     * @Route("/{id}/visits/{page}", name="client_visits", defaults={"page":1}, requirements={"page":"\d+"})
      * @Template
      */
-    public function visitsAction(Client $client)
+    public function visitsAction(Client $client, $page)
     {
 
         return [
             'client' => $client,
-            'visits' => $this->get('gym.service.visits')->getList($client, 1)
+            'visits' => $this->get('gym.service.visits')->getList($client, $page)
         ];
     }
 
