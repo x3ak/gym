@@ -1,4 +1,31 @@
 {% extends '@Gym/Client/show.html.twig' %}
+{% block title_addition %}
+    {{ "Visits"|trans }}
+{% endblock %}
 {% block client_view %}
-    visits list
+    {% embed '::listing.html.twig' %}
+        {% block listing_head %}
+            <tr>
+                <th class="short-date">{{ "Date"|trans }}</th>
+                <th class="time">{{ "Start"|trans }}</th>
+                <th class="time">{{ "End"|trans }}</th>
+                <th>{{ "Duration"|trans }}</th>
+            </tr>
+        {% endblock %}
+
+        {% block listing_body %}
+            {% for visit in visits %}
+                <tr>
+                    <td>{{ visit.day.format('j M y') }}</td>
+                    <td>{{ visit.enter.format('H:i') }}</td>
+                    <td>{{ visit.exit.format('H:i') }}</td>
+                    <td class="duration">{{ visit.duration }}</td>
+                </tr>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(visits) }}
+    </div>
 {% endblock %}

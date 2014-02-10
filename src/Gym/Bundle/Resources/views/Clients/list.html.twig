@@ -20,7 +20,7 @@
         <tr>
             <td>{{ client.code }}</td>
             <td>{{ client|fullname }}</td>
-            <td><a href="{{ path("show_client", {id: client.id}) }}">View</a> </td>
+            <td><a href="{{ path("client_dashboard", {id: client.id}) }}">View</a> </td>
         </tr>
         {% endfor %}
 

@@ -112,14 +112,6 @@ class Client
     }
 
     /**
-     * @return \Gym\Bundle\Entity\Visit[]
-     */
-    public function getVisits()
-    {
-        return $this->visits;
-    }
-
-    /**
      * @return Subscription
      */
     public function getSubscription()
@@ -127,7 +119,12 @@ class Client
         return $this->subscription;
     }
 
-
-
+    /**
+     * @return \Gym\Bundle\Entity\Subscription[]
+     */
+    public function getSubscriptions()
+    {
+        return $this->subscriptions;
+    }
 
 }

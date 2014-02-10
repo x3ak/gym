@@ -21,10 +21,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ClientController extends Controller
 {
     /**
-     * @Route("/{id}/show", name="show_client")
+     * @Route("/{id}/dashboard", name="client_dashboard")
      * @Template
      */
-    public function statisticsAction(Client $client)
+    public function dashboardAction(Client $client)
     {
         return ['client' => $client];
     }
@@ -35,7 +35,11 @@ class ClientController extends Controller
      */
     public function visitsAction(Client $client)
     {
-        return ['client' => $client];
+
+        return [
+            'client' => $client,
+            'visits' => $this->get('gym.service.visits')->getList($client, 1)
+        ];
     }
 
     /**

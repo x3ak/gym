@@ -63,5 +63,36 @@ class Subscription
      */
     private $client;
 
+    /**
+     * @return \DateTime
+     */
+    public function getExpireDate()
+    {
+        return $this->expireDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @return \Gym\Bundle\Entity\SubscriptionType
+     */
+    public function getSubscriptionType()
+    {
+        return $this->subscriptionType;
+    }
 
 }

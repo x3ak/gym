@@ -38,15 +38,20 @@ class VisitsService
     }
 
     /**
+     * @param \Gym\Bundle\Entity\Client $client
      * @param $page
-     * @param \DateTime $start
-     * @param \DateTime|null $end
      * @return \Knp\Component\Pager\Pagination\PaginationInterface
      */
-    public function getList($page)
+    public function getList(Client $client, $page)
     {
         return $this->paginator->paginate(
-            $this->visitRepository->getListQuery()
+            $this->visitRepository->getByClient($client),
+            $page,
+            $this->pageSize,
+            [
+                'defaultSortFieldName' => 'v.day',
+                'defaultSortDirection' => 'desc'
+            ]
         );
     }
 

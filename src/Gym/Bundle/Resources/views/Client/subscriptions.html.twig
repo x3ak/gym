@@ -1,24 +1,25 @@
 {% extends '@Gym/Client/show.html.twig' %}
+{% block title_addition %}
+    {{ "Subscriptions"|trans }}
+{% endblock %}
 {% block client_view %}
-    <table class="list">
-        <thead>
-        <tr>
-            <th class="code">Code</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for subscription in subscriptions %}
+    {% embed '::listing.html.twig' %}
+        {% block listing_head %}
             <tr>
-                <td>{{ client.code }}</td>
-                <td>{{ client|fullname }}</td>
-                <td><a href="{{ path("show_client", {id: client.id}) }}">View</a> </td>
+                <th>{{ "Start"|trans }}</th>
+                <th>{{ "Expire"|trans }}</th>
+                <th>{{ "Price"|trans }}</th>
             </tr>
-        {% endfor %}
+        {% endblock %}
 
-    </table>
-    <div class="navigation">
-        {{ knp_pagination_render(clients) }}
-    </div>
+        {% block listing_body %}
+            {% for subscription in client.subscriptions %}
+                <tr>
+                    <td>{{ subscription.startDate.format('Y-m-d') }}</td>
+                    <td>{{ subscription.expireDate.format('Y-m-d') }}</td>
+                    <td>{{ subscription.price }}</td>
+                </tr>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

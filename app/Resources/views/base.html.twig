@@ -5,10 +5,11 @@
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link href='/font-awesome/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
-        {% stylesheets '@GymBundle/Resources/public/css/main.css' filter='cssrewrite' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        <link href='/css/main.css' rel='stylesheet' type='text/css'>
+
         {% block stylesheets %}{% endblock %}
+        <script type="text/javascript" src="/jquery/jquery-2.1.0.min.js"></script>
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -17,13 +18,16 @@
             {% block header %}
                 <header>
                     <div>
-                        <div class="menu-bars"><i class="fa fa-bars"></i></div>
-                        <ul class="navigation">
-                            <li>asdasd</li>
-                            <li>dsa</li>
-                            <li>gggasd</li>
-                            <li>a3dsas</li>
-                        </ul>
+                        <div class="menu-bars"><i class="fa fa-bars navigation-trigger"></i></div>
+                        <div class="navigation-container">
+
+                            <ul class="main-navigation">
+                                <li>Home</li>
+                                <li>Clients</li>
+                            </ul>
+
+                        </div>
+
                     </div>
 
                     <h1 class="page-title">{{ block('title') }}</h1>

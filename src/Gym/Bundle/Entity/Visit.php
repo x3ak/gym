@@ -52,4 +52,45 @@ class Visit
      */
     private $client;
 
+    /**
+     * @return \DateTime
+     */
+    public function getDay()
+    {
+        return $this->day;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getExit()
+    {
+        return $this->exit;
+    }
+
+    public function getEnter()
+    {
+        return $this->enter;
+    }
+
+    public function getDuration()
+    {
+        if (is_null($this->exit)) {
+            return null;
+        }
+
+        $diff = $this->enter->diff($this->exit);
+
+        $format = [];
+
+        if ($diff->h > 0) {
+            $format[] = '%hh';
+        }
+
+        if ($diff->i > 0) {
+            $format[] = '%Im';
+        }
+
+        return $diff->format(implode(' ', $format));
+    }
 }

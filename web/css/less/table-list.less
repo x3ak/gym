@@ -1,0 +1,45 @@
+table.list {
+    border-collapse: collapse;
+    width: 100%;
+
+    thead tr th {
+        border-bottom: 1px solid silver;
+        line-height: 30px;
+
+        &.code {
+            width: 100px;
+        }
+
+        &.short-date {
+            width: 110px;
+        }
+
+        &.time {
+            width: 80px;
+        }
+    }
+
+    tbody tr {
+        &:nth-child(odd) td {
+            background-color: #ececec;
+        }
+
+        td {
+            border-bottom: 1px solid silver;
+            line-height: 30px;
+            text-align: center;
+
+            &.duration {
+                text-align: right;
+            }
+
+            &:first-child {
+                padding-left: 5px;
+            }
+
+            &:last-child {
+                padding-right: 5px;
+            }
+        }
+    }
+}
