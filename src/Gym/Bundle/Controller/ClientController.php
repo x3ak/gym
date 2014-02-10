@@ -21,10 +21,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ClientController extends Controller
 {
     /**
-     * @Route("/{id}/show", name="clients_show")
+     * @Route("/{id}/show", name="show_client")
      * @Template
      */
-    public function showAction(Client $client)
+    public function statisticsAction(Client $client)
+    {
+        return ['client' => $client];
+    }
+
+    /**
+     * @Route("/{id}/visits", name="client_visits")
+     * @Template
+     */
+    public function visitsAction(Client $client)
+    {
+        return ['client' => $client];
+    }
+
+    /**
+     * @Route("/{id}/subscriptions", name="client_subscriptions")
+     * @Template
+     */
+    public function subscriptionsAction(Client $client)
     {
         return ['client' => $client];
     }

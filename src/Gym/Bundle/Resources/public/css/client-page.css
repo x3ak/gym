@@ -1,0 +1,23 @@
+.client-page .info {
+  display: flex;
+}
+.client-page .info .avatar {
+  width: 100px;
+}
+.client-page .info div {
+  border: 1px solid red;
+}
+.client-page .view ul.navigation {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.client-page .view ul.navigation li {
+  list-style: none;
+}
+.client-page .view ul.navigation li a {
+  padding: 2px 4px;
+}
+.client-page .view .view-content {
+  padding: 2px 4px;
+}

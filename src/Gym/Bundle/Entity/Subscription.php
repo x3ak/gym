@@ -43,7 +43,7 @@ class Subscription
     private $expireDate;
 
     /**
-     * @var \SubscriptionType
+     * @var SubscriptionType
      *
      * @ORM\ManyToOne(targetEntity="SubscriptionType")
      * @ORM\JoinColumns({
@@ -53,9 +53,9 @@ class Subscription
     private $subscriptionType;
 
     /**
-     * @var \Client
+     * @var Client
      *
-     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="subscriptions")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      * })

@@ -9,16 +9,16 @@ namespace Gym\Bundle\Service;
 
 
 use Gym\Bundle\Entity\Client;
-use Gym\Bundle\Entity\ClientRepository;
 use Gym\Bundle\Entity\Visit;
+use Gym\Bundle\Entity\VisitRepository;
 use Knp\Component\Pager\Paginator;
 
-class ClientsService
+class VisitsService
 {
     /**
-     * @var \Gym\Bundle\Entity\ClientRepository
+     * @var \Gym\Bundle\Entity\VisitRepository
      */
-    protected $clientRepository;
+    protected $visitRepository;
 
     /**
      * @var \Knp\Component\Pager\Paginator
@@ -30,24 +30,34 @@ class ClientsService
      */
     protected $pageSize;
 
-    public function __construct(ClientRepository $clientRepository, Paginator $paginator, $pageSize)
+    public function __construct(VisitRepository $visitRepository, Paginator $paginator, $pageSize)
     {
-        $this->clientRepository = $clientRepository;
+        $this->visitRepository = $visitRepository;
         $this->paginator = $paginator;
         $this->pageSize = $pageSize;
     }
 
     /**
      * @param $page
+     * @param \DateTime $start
+     * @param \DateTime|null $end
      * @return \Knp\Component\Pager\Pagination\PaginationInterface
      */
     public function getList($page)
     {
         return $this->paginator->paginate(
-            $this->clientRepository->getListQuery(),
-            $page,
-            $this->pageSize
+            $this->visitRepository->getListQuery()
         );
+    }
+
+    public function create(Client $client)
+    {
+
+    }
+
+    public function finish(Visit $visit)
+    {
+
     }
 
 } 

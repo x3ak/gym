@@ -12,7 +12,7 @@
             <tr>
                 <th class="code">Code</th>
                 <th>Name</th>
-                <th>Other stuff</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +20,7 @@
         <tr>
             <td>{{ client.code }}</td>
             <td>{{ client|fullname }}</td>
-            <td></td>
+            <td><a href="{{ path("show_client", {id: client.id}) }}">View</a> </td>
         </tr>
         {% endfor %}
 

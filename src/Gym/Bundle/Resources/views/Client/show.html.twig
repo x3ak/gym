@@ -1,5 +1,29 @@
 {% extends '::base.html.twig' %}
+{% block title %}
+    {{ client|fullname }} :: {{ "View"|trans }}
+{% endblock %}
 {% block content %}
-    {{ client|fullname }}
-    {{ client.code }}
+    <div class="client-page">
+        <div class="info">
+            <div class="avatar">
+a
+            </div>
+            <div class="bio">
+                {{ client|fullname }}
+                {{ client.code }}
+            </div>
+        </div>
+        <div class="view">
+            <ul class="navigation">
+                <li><a href="{{ path("show_client", {id: client.id}) }}">{{ "Statistics"|trans }}</a></li>
+                <li><a href="{{ path("client_visits", {id: client.id}) }}">{{ "Visits"|trans }}</a></li>
+                <li><a href="{{ path("client_subscriptions", {id: client.id}) }}">{{ "Subscriptions"|trans }}</a></li>
+            </ul>
+            <div class="view-content">
+            {% block client_view %}
+
+            {% endblock %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

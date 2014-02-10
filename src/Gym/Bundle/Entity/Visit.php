@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Visit
  *
  * @ORM\Table(name="visit", indexes={@ORM\Index(name="fk_visit_client_idx", columns={"client_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Gym\Bundle\Entity\VisitRepository")
  */
 class Visit
 {
@@ -45,12 +45,11 @@ class Visit
     /**
      * @var Client
      *
-     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="visits")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      * })
      */
     private $client;
-
 
 }

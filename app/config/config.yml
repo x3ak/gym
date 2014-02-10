@@ -97,7 +97,20 @@ services:
         factory_method: getRepository
         arguments: ["GymBundle:Client"]
 
+    gym.repository.visit:
+        class: Gym\Bundle\Entity\VisitRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: ["GymBundle:Visit"]
+
     # services
+    gym.service.visits:
+        class: Gym\Bundle\Service\VisitsService
+        arguments: ["@gym.repository.visit", "@knp_paginator", %visits_page_size%]
+
     gym.service.clients:
         class: Gym\Bundle\Service\ClientsService
         arguments: ["@gym.repository.client", "@knp_paginator", %client_page_size%]
+
+    gym.service.helper:
+        class: Gym\Bundle\Service\HelperService

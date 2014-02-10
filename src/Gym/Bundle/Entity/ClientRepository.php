@@ -12,11 +12,6 @@ use Doctrine\ORM\EntityRepository;
 
 class ClientRepository extends EntityRepository
 {
-    public function getTodayClients()
-    {
-
-    }
-
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -29,18 +24,4 @@ class ClientRepository extends EntityRepository
 
     }
 
-    /**
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    public function getByVisitDateQuery(\DateTime $startDate, \DateTime $endDate)
-    {
-        return $this->getListQuery()
-            ->join('c.visits', 'v', 'WITH', 'v.day = :start AND v.day <= :end')
-            ->setParameters([
-                'start' => $startDate->format('Y-m-d'),
-                'end' => $endDate->format('Y-m-d')
-            ]);
-    }
 }

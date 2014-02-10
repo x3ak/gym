@@ -1,0 +1,24 @@
+{% extends '@Gym/Client/show.html.twig' %}
+{% block client_view %}
+    <table class="list">
+        <thead>
+        <tr>
+            <th class="code">Code</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for subscription in subscriptions %}
+            <tr>
+                <td>{{ client.code }}</td>
+                <td>{{ client|fullname }}</td>
+                <td><a href="{{ path("show_client", {id: client.id}) }}">View</a> </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(clients) }}
+    </div>
+{% endblock %}

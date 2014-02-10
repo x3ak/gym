@@ -16,20 +16,29 @@
             <div class="container">
             {% block header %}
                 <header>
-                    <ul class="navigation">
-                        <li><a href="{{ path('dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
-                        <li>
-                            <a href="{{ path('clients_today') }}">Clients</a>
-                        </li>
-                    </ul>
-                </header>
-            {% endblock %}
-            <h3>{{ block('title') }}</h3>
+                    <div>
+                        <div class="menu-bars"><i class="fa fa-bars"></i></div>
+                        <ul class="navigation">
+                            <li>asdasd</li>
+                            <li>dsa</li>
+                            <li>gggasd</li>
+                            <li>a3dsas</li>
+                        </ul>
+                    </div>
 
-            {% block content %}
-            {% endblock %}
-            {% block footer %}
-            {% endblock %}
+                    <h1 class="page-title">{{ block('title') }}</h1>
+
+
+                </header>
+
+                {% endblock %}
+                <div class="content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+
+                {% block footer %}
+                {% endblock %}
             </div>
         {% endblock %}
 

@@ -74,12 +74,27 @@ class Client
     private $subscription;
 
     /**
+     * @var Subscription[]
+     *
+     * @ORM\OneToMany(targetEntity="Subscription", mappedBy="client")
+     */
+    protected $subscriptions;
+
+
+    /**
      * @var Visit[]
      *
      * @ORM\OneToMany(targetEntity="Visit", mappedBy="client")
      */
     private $visits;
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getFirstName()
     {
@@ -97,10 +112,22 @@ class Client
     }
 
     /**
+     * @return \Gym\Bundle\Entity\Visit[]
+     */
+    public function getVisits()
+    {
+        return $this->visits;
+    }
+
+    /**
      * @return Subscription
      */
     public function getSubscription()
     {
         return $this->subscription;
     }
+
+
+
+
 }
