@@ -16,79 +16,64 @@ body {
     color: #1a1a1a;
     padding: 0;
     margin: 0;
-    background-color: #e9e9e9;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    li {
+        list-style: none;
+    }
 }
 
 * { box-sizing: border-box }
 
 .container {
-    header {
-        .box-shadow();
-        background-color: white;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+    overflow: hidden;
+    .viewport {
 
-        padding: 5px;
-
-        .page-title {
-            margin: 0;
-            font-size: 20px;
-            color: darken(@color-red, 20%);
-            text-align: center;
+        &.animated > div {
+            transition: all 300ms ease-in;
         }
 
-        .menu-bars {
+        .main-navigation {
+            z-index: 3;
+            top: 0;
+            left: -@main-navigation-width;
+            height: 100%;
+            width: @main-navigation-width;
+            position: fixed;
+            background-color: #e9e9e9;
+        }
+
+        .content {
+            left: 0;
+            z-index: 1;
+            position: relative;
+            background-color: white;
             border: 1px solid silver;
-            border-radius: 5px;
-            padding: 2px 6px;
-            background-color: #fff;
-            float: left;
-            cursor: pointer;
-
-            i {
-                font-size: 16px;
-            }
-
-
-            &:hover {
-                color: #ffffff;
-                background-color: @color-red;
-                border-color: #4e4e4e;
-            }
-
-            &.active {
-                color: #ffffff;
-                background-color: @color-red;
-                border-color: #4e4e4e;
-            }
-
-
+            border-right-width: 0px;
         }
 
-        .navigation {
-            padding: 0;
-            margin: 0;
-            display: none;
-        }
-    }
 
-    .content {
-        margin: 45px 0px 10px;
-        background-color: white;
-        border: 1px solid silver;
-        border-left-width: 0px;
-        border-right-width: 0px;
+        &.navigation-active {
+            .main-navigation {
+                left: 0;
+            }
 
-        @media @desktop {
-            .box-shadow();
-            border-left-width: 1px;
-            border-right-width: 1px;
-            border-radius: 4px;
-            margin: 50px auto 10px;
-            max-width: 1000px;
+            .content {
+                left: @main-navigation-width;
+            }
         }
     }
 }
+
+//@media @desktop {
+//    .box-shadow();
+//    border-left-width: 1px;
+//    border-right-width: 1px;
+//    border-radius: 4px;
+//    margin: 50px auto 10px;
+//    max-width: 1000px;
+//}
 

@@ -28,26 +28,7 @@
 
 {% block content %}
     <div class="client-page">
-        <ul class="module-navigation">
-        {% block module_navigation %}
-            {% for item in navigationItems %}
-                {% set path = path(item.path, item.pathParams) %}
 
-                {% if app.request.attributes.get('_route') == item.path %}
-                <li class="active">
-                {% else %}
-                <li>
-                {% endif %}
-
-                <a href="{{ path }}">
-                    <i class="fa fa-{{ item.icon }}"></i>
-                    <span>{{ item.title|trans }}</span>
-                </a>
-
-                </li>
-            {% endfor %}
-        {% endblock %}
-        </ul>
         <div class="view">
             <div class="view-content">
             {% block client_view %}

@@ -17,40 +17,111 @@
     <body>
         {% block body %}
             <div class="container">
-            {% block header %}
-                <div class="navigation-container">
+                <div class="viewport animated">
                     <div class="main-navigation">
+                        <div class="menu-section">Menu</div>
                         <ul>
-                            <li><a href="{{ path('dashboard') }}">Home</a></li>
-                            <li><a href="{{ path('clients_list') }}">Clients</a></li>
+                            <li><a href="{{ path('dashboard') }}"><i class="fa fa-home"></i>Home</a></li>
+                            <li><a href="{{ path('clients_list') }}"><i class="fa fa-users"></i>Clients</a></li>
+                        </ul>
+                        <div class="menu-section">Reports</div>
+                        <ul>
+                            <li><a href="javascript:;"><i class="fa fa-clipboard"></i>In club</a></li>
+                            <li><a href="{{ path('clients_list') }}"><i class="fa fa-users"></i>Today Visits</a></li>
+                            <li><a href="javascript:;"><i class="fa fa-clipboard"></i>In club</a></li>
+                            <li><a href="{{ path('clients_list') }}"><i class="fa fa-users"></i>Today Visits</a></li>
+                            <li><a href="javascript:;"><i class="fa fa-clipboard"></i>In club</a></li>
+                            <li><a href="{{ path('clients_list') }}"><i class="fa fa-users"></i>Today Visits</a></li>
                         </ul>
                     </div>
+
+                    <div class="content">
+                        <ul class="module-navigation">
+                            <li class="menu-trigger">
+                                <a href="/">
+                                    <i class="fa fa-bars navigation-trigger"></i>
+                                </a>
+                            </li>
+                            {% for item in navigationItems %}
+                                {% set path = path(item.path, item.pathParams) %}
+
+                                {% if app.request.attributes.get('_route') == item.path %}
+                                    <li class="active">
+                                {% else %}
+                                    <li>
+                                {% endif %}
+
+                                <a href="{{ path }}">
+                                    <i class="fa fa-{{ item.icon }}"></i>
+                                    <span>{{ item.title|trans }}</span>
+                                </a>
+
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                        {% block content %}
+                        {% endblock %}
+                    </div>
                 </div>
-
-                <header>
-                    <div class="menu-bars"><i class="fa fa-bars navigation-trigger"></i></div>
-                    <h1 class="page-title">{{ block('title') }}</h1>
-                </header>
-
-                {% endblock %}
-                <div class="content">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-
-                {% block footer %}
-                {% endblock %}
             </div>
         {% endblock %}
 
         {% block javascripts %}{% endblock %}
 
         <script type="text/javascript">
-            $(window).ready(function(){
+//            var touch = {
+//                start: {x: 0},
+//                delta: {x: 0}
+//            };
+//
+//            var tmpDelta = {x: 0};
+//
+//            var requestId, nav, navStart = -200;
+//
+//            function listenForDeltaChange() {
+//                requestId = requestAnimationFrame(listenForDeltaChange);
+//
+//                if (tmpDelta.x != touch.delta.x) {
+//                    console.log('change');
+//
+//                    var newLeft = navStart + touch.delta.x;
+//                    if (newLeft <= 0 && newLeft > -201) {
+//                        nav.css({left: newLeft});
+//                    }
+//
+//                    tmpDelta.x = touch.delta.x;
+//                } else {
+//                    console.log('skip');
+//                }
+//            }
 
-                $('.menu-bars').click(function(){
-                    $('.navigation-container').toggleClass('active');
-                    $(this).toggleClass('active');
+
+            $(document).ready(function(){
+//                nav = $('.main-navigation');
+//
+//                this.addEventListener('touchstart', function(e) {
+//                    var touchObj = e.changedTouches[0];
+//                    touch.start.x = touchObj.pageX;
+//                    navStart = nav.position().left;
+//                    requestAnimationFrame(listenForDeltaChange);
+//
+//                    $('.viewport').removeClass('animated');
+//                });
+//
+//                this.addEventListener('touchmove', function(e){
+//                    var touchObj = e.changedTouches[0];
+//                    touch.delta.x = touchObj.pageX - touch.start.x;
+//                });
+//
+//                this.addEventListener('touchend', function(e){
+//                    window.cancelAnimationFrame(requestId);
+//                    $('.viewport').addClass('animated');
+//                });
+
+                $('.menu-trigger').click(function(e){
+                    e.preventDefault();
+                    $('.viewport').toggleClass('navigation-active');
                 });
             });
         </script>
