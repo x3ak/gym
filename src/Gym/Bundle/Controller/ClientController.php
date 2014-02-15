@@ -31,6 +31,7 @@ class ClientController extends Controller
 
     /**
      * @Route("/{id}/visits/{page}", name="client_visits", defaults={"page":1}, requirements={"page":"\d+"})
+     *
      * @Template
      */
     public function visitsAction(Client $client, $page)

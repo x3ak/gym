@@ -11,28 +11,25 @@
         <script type="text/javascript" src="/jquery/jquery-2.1.0.min.js"></script>
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+
     </head>
     <body>
         {% block body %}
             <div class="container">
             {% block header %}
-                <header>
-                    <div>
-                        <div class="menu-bars"><i class="fa fa-bars navigation-trigger"></i></div>
-                        <div class="navigation-container">
-
-                            <ul class="main-navigation">
-                                <li>Home</li>
-                                <li>Clients</li>
-                            </ul>
-
-                        </div>
-
+                <div class="navigation-container">
+                    <div class="main-navigation">
+                        <ul>
+                            <li><a href="{{ path('dashboard') }}">Home</a></li>
+                            <li><a href="{{ path('clients_list') }}">Clients</a></li>
+                        </ul>
                     </div>
+                </div>
 
+                <header>
+                    <div class="menu-bars"><i class="fa fa-bars navigation-trigger"></i></div>
                     <h1 class="page-title">{{ block('title') }}</h1>
-
-
                 </header>
 
                 {% endblock %}
@@ -47,5 +44,15 @@
         {% endblock %}
 
         {% block javascripts %}{% endblock %}
+
+        <script type="text/javascript">
+            $(window).ready(function(){
+
+                $('.menu-bars').click(function(){
+                    $('.navigation-container').toggleClass('active');
+                    $(this).toggleClass('active');
+                });
+            });
+        </script>
     </body>
 </html>

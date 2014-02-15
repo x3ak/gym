@@ -1,11 +1,128 @@
 @import "mixins";
-header .navigation-container {
+
+@menu-box-size: 40px;
+@menu-box-size-desktop: 30px;
+
+.navigation-container {
     .box-shadow();
 
-    display: none;
+    padding-top: 40px;
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: -300px;
+    left: 0;
     background-color: white;
     border-radius: 4px;
+    transition: top 500ms ease, opacity 600ms ease;
+    opacity: 0;
+    width: 100%;
+    height: 300px;
+
+    display: flex;
+
+    & > div {
+        width: 50%;
+    }
+
+    &.active {
+        top: 0;
+        opacity: 1;
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        li {
+            list-style: none;
+        }
+    }
+
+    @media @desktop {
+        width: 400px;
+    }
 }
+
+.content ul.module-navigation {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+
+    border-bottom: 1px solid silver;
+
+    li {
+        list-style: none;
+        margin: -1px 0;
+
+        border: 1px solid transparent;
+        border-right-color: silver;
+        text-align: center;
+        width: @menu-box-size;
+        height: @menu-box-size;
+        line-height: @menu-box-size;
+
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.1))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
+
+        &.active {
+            width: auto;
+            background-color: @color-red;
+            border-color: darken(@color-red, 10%);
+            margin-left: -1px;
+
+            &:first-child {
+                margin-left: 0px;
+            }
+
+            a {
+                padding: 0 15px;
+                color: #ffffff;
+
+                i {
+                    margin-right: 5px;
+                }
+
+                span {
+                    display: inline;
+                }
+            }
+
+        }
+
+        a {
+            text-decoration: none;
+            display: block;
+
+            span {
+                display: none;
+            }
+        }
+    }
+
+    @media @desktop {
+        li {
+            width: auto;
+            height: @menu-box-size-desktop;
+            line-height: @menu-box-size-desktop;
+
+            &:first-child {
+                border-radius: 4px 0 0 0;
+            }
+
+            a {
+                padding: 0 15px;
+
+                span {
+                    display: inline;
+                }
+            }
+        }
+    }
+}
+
