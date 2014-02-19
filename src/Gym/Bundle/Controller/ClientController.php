@@ -51,4 +51,13 @@ class ClientController extends Controller
     {
         return ['client' => $client];
     }
+
+    /**
+     * @Route("/{id}/subscriptions", name="client_subscriptions")
+     * @Template
+     */
+    public function editAction(Client $client)
+    {
+        return ['client' => $client];
+    }
 } 

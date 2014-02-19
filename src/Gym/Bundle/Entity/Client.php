@@ -127,4 +127,17 @@ class Client
         return $this->subscriptions;
     }
 
+    /**
+     * @return Visit
+     */
+    public function getActiveVisit()
+    {
+        foreach ($this->visits as $visit) {
+            if ($visit->isActive()) {
+                return $visit;
+            }
+        }
+
+    }
+
 }

@@ -4,18 +4,45 @@
 @import "table-list";
 @import "client-page";
 @import "navigation";
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import "pagination";
 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+    margin: 0.5em;
+
+}
 
 a {
-    color: #1a1a1a;
+    color: @text-color;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    color: #1a1a1a;
+    font-family: 'Open Sans', sans-serif;
+    color: @text-color;
     padding: 0;
     margin: 0;
+    height: 100%;
+    background-color: #e5e9ec;
+
+    &.navigation-active {
+        overflow: hidden;
+
+        .container .viewport .content {
+            left: @main-navigation-width;
+            box-shadow: -1px 0 5px rgba(0,0,0,0.4);
+        }
+    }
+}
+
+input {
+    border: 1px solid silver;
+    padding: 4px;
+    width: 100%;
+    margin: 0;
+    line-height: 20px;
+    font-size: 1em;
 }
 
 ul {
@@ -29,51 +56,126 @@ ul {
 * { box-sizing: border-box }
 
 .container {
-    overflow: hidden;
+//    overflow: hidden;
     .viewport {
 
-        &.animated > div {
-            transition: all 300ms ease-in;
+        > div {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
         }
 
         .main-navigation {
-            z-index: 3;
-            top: 0;
-            left: -@main-navigation-width;
-            height: 100%;
+            z-index: 1;
             width: @main-navigation-width;
-            position: fixed;
-            background-color: #e9e9e9;
+
+            .search {
+                padding: 4px;
+            }
         }
 
         .content {
-            left: 0;
-            z-index: 1;
-            position: relative;
-            background-color: white;
-            border: 1px solid silver;
-            border-right-width: 0px;
-        }
-
-
-        &.navigation-active {
-            .main-navigation {
-                left: 0;
-            }
-
-            .content {
-                left: @main-navigation-width;
-            }
+            z-index: 2;
+            background-color: #e5e9ec;
         }
     }
 }
 
-//@media @desktop {
-//    .box-shadow();
-//    border-left-width: 1px;
-//    border-right-width: 1px;
-//    border-radius: 4px;
-//    margin: 50px auto 10px;
-//    max-width: 1000px;
-//}
+body.animated {
+    .viewport .content {
+        transition: all 150ms ease;
+    }
+}
 
+@media @desktop {
+    .viewport .content {
+        left: @main-navigation-width !important;
+        box-shadow: none !important;
+    }
+}
+
+.badge {
+    padding: 3px 9px;
+    font-size: 11px;
+    text-shadow: none;
+    background-color: #D1DADE;
+    font-weight: 600;
+    color: #5E5E5E;
+    text-transform: uppercase;
+}
+
+.badge-important {
+    background-color: #f35958;
+    color: #fff;
+}
+
+
+
+.badge-success {
+    background-color: #0aa699;
+    color: #fff;
+}
+
+
+.clients-search {
+    padding: 0 10px;
+    position: relative;
+
+    .fa-spinner {
+        top: 5px;
+        right: 15px;
+        font-size: 1.2em;
+        position: absolute;
+    }
+
+    li {
+
+        margin-top: 10px;
+        a {
+            background-color: #0aa699;
+            color: white !important;
+            border-radius: 3px;
+
+            span {
+                font-size: 0.6em;
+            }
+
+            &:hover {
+                background-color: darken(#0aa699, 5%);
+            }
+
+            &.finish {
+                background-color: #f35958;
+                &:hover {
+                    background-color: darken(#f35958, 5%) ;
+                }
+            }
+        }
+
+
+    }
+}
+
+.flash-messages {
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    div.flash-notice {
+        color: white;
+        background-color: #0aa699;
+        border: 1px solid darken(#0aa699, 5%);
+        padding: 5px 10px;
+        border-radius: 3px;
+        margin-top: 10px;
+        box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+    }
+}

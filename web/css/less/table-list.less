@@ -9,7 +9,7 @@ table.list {
         padding: 2px 5px;
 
         &.code {
-            width: 100px;
+            width: 60px;
         }
 
         &.short-date {
@@ -27,6 +27,11 @@ table.list {
         }
 
         td {
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+
             border-bottom: 1px solid silver;
             line-height: 30px;
             text-align: left;

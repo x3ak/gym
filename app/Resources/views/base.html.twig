@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="gymApp">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -9,56 +9,105 @@
 
         {% block stylesheets %}{% endblock %}
         <script type="text/javascript" src="/jquery/jquery-2.1.0.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
+
+        <script type="text/javascript">
+            var routes = {
+                clients_search: '/clients/search.json'
+            };
+
+        </script>
+
+        <script type="text/javascript" src="/js/angular/app.js"></script>
+
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
 
     </head>
     <body>
+    {% set currentRoute = app.request.attributes.get('_route') %}
         {% block body %}
             <div class="container">
+
+                {{ dump(app.session.flashbag) }}
+                <div class="flash-messages">
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="flash-notice">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                </div>
+
                 <div class="viewport animated">
                     <div class="main-navigation">
                         <div class="menu-section">Menu</div>
                         <ul>
-                            <li><a href="{{ path('dashboard') }}"><i class="fa fa-home"></i>Home</a></li>
-                            <li><a href="{{ path('clients_list') }}"><i class="fa fa-users"></i>Clients</a></li>
+                            <li class="active"><a href="{{ path('dashboard') }}"><i class="fa fa-home"></i>{{ "Dashboard"|trans }}</a></li>
+                            <li><a href="{{ path('clients_list_active') }}"><i class="fa fa-users"></i>{{ "Clients"|trans }}</a></li>
                         </ul>
                         <div class="menu-section">Reports</div>
                         <ul>
                             <li><a href="javascript:;"><i class="fa fa-clipboard"></i>In club</a></li>
-                            <li><a href="{{ path('clients_list') }}"><i class="fa fa-users"></i>Today Visits</a></li>
                             <li><a href="javascript:;"><i class="fa fa-clipboard"></i>In club</a></li>
-                            <li><a href="{{ path('clients_list') }}"><i class="fa fa-users"></i>Today Visits</a></li>
-                            <li><a href="javascript:;"><i class="fa fa-clipboard"></i>In club</a></li>
-                            <li><a href="{{ path('clients_list') }}"><i class="fa fa-users"></i>Today Visits</a></li>
                         </ul>
+
+
+                        <div class="menu-section">Start/End visit</div>
+                        <div class="clients-search" ng-controller="clientsSearchController">
+                            <input type="text" name="client-code" placeholder="{{ "Client Code"|trans }}"
+                                   ng-disabled="state.inProgress"
+                                   ng-model="clientCode" />
+
+                            <i class="fa fa-spinner fa-spin" ng-show="state.inProgress"></i>
+
+                            <ul class="search-result">
+                                <li ng-repeat="client in clients">
+
+                                    <a href="{[{ client.url.visit_finish }]}" class="finish" ng-show="client.inClub">
+                                        <span>{[{ client.code }]}</span>
+                                        {[{ client.firstName }]}
+                                        {[{ client.lastName }]}
+                                    </a>
+
+                                    <a href="{[{ client.url.visit_start }]}" ng-hide="client.inClub">
+                                        <span>{[{ client.code }]}</span>
+                                        {[{ client.firstName }]}
+                                        {[{ client.lastName }]}
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
 
                     <div class="content">
-                        <ul class="module-navigation">
-                            <li class="menu-trigger">
-                                <a href="/">
-                                    <i class="fa fa-bars navigation-trigger"></i>
-                                </a>
-                            </li>
-                            {% for item in navigationItems %}
-                                {% set path = path(item.path, item.pathParams) %}
 
-                                {% if app.request.attributes.get('_route') == item.path %}
-                                    <li class="active">
+                        <div class="page-title">
+                            <h3>{% block page_title %}{% endblock %}</h3>
+                        </div>
+                        {% if navigationItems is defined and navigationItems|length > 0 %}
+                        <ul class="module-navigation">
+
+                            {% for item in navigationItems %}
+                                {% set path = path(item.path, item.pathParams|default({})) %}
+
+                                {% if currentRoute == item.path %}
+                                <li class="active">
                                 {% else %}
-                                    <li>
+                                <li>
                                 {% endif %}
 
-                                <a href="{{ path }}">
-                                    <i class="fa fa-{{ item.icon }}"></i>
-                                    <span>{{ item.title|trans }}</span>
-                                </a>
+                                    <a href="{{ path }}">
+                                        <i class="fa fa-{{ item.icon }}"></i>
+                                        <span>{{ item.title|trans }}</span>
+                                    </a>
 
                                 </li>
                             {% endfor %}
                         </ul>
+                        {% endif %}
 
                         {% block content %}
                         {% endblock %}
@@ -70,60 +119,114 @@
         {% block javascripts %}{% endblock %}
 
         <script type="text/javascript">
-//            var touch = {
-//                start: {x: 0},
-//                delta: {x: 0}
-//            };
-//
-//            var tmpDelta = {x: 0};
-//
-//            var requestId, nav, navStart = -200;
-//
-//            function listenForDeltaChange() {
-//                requestId = requestAnimationFrame(listenForDeltaChange);
-//
-//                if (tmpDelta.x != touch.delta.x) {
-//                    console.log('change');
-//
-//                    var newLeft = navStart + touch.delta.x;
-//                    if (newLeft <= 0 && newLeft > -201) {
-//                        nav.css({left: newLeft});
-//                    }
-//
-//                    tmpDelta.x = touch.delta.x;
-//                } else {
-//                    console.log('skip');
-//                }
-//            }
 
+            var touch = {
+                start: {x: 0, y: 0},
+                delta: {x: 0, y: 0}
+            };
+
+            var navSize = 250;
+            var autoFinish = 30;
+            var stickySize = 30;
+            var tmpDelta = {x: 0};
+            var slidingMenu = false;
+            var navigationMoved = false;
+
+            var requestId, nav, navStart = 0;
+
+            function listenForDeltaChange() {
+                requestId = requestAnimationFrame(listenForDeltaChange);
+
+                if (tmpDelta.x != touch.delta.x && Math.abs(touch.delta.x) > stickySize) {
+
+                    var newLeft = navStart + touch.delta.x;
+                    if (newLeft >= 0 && newLeft < navSize) {
+                        newLeft = (newLeft < stickySize) ? 0 : newLeft;
+                        newLeft = (newLeft > navSize - stickySize) ? navSize : newLeft;
+
+                        nav.css({left: newLeft});
+                        navigationMoved = true;
+                    }
+
+                    tmpDelta.x = touch.delta.x;
+                }
+            }
+
+            var interval;
 
             $(document).ready(function(){
-//                nav = $('.main-navigation');
-//
-//                this.addEventListener('touchstart', function(e) {
-//                    var touchObj = e.changedTouches[0];
-//                    touch.start.x = touchObj.pageX;
-//                    navStart = nav.position().left;
-//                    requestAnimationFrame(listenForDeltaChange);
-//
-//                    $('.viewport').removeClass('animated');
-//                });
-//
-//                this.addEventListener('touchmove', function(e){
-//                    var touchObj = e.changedTouches[0];
-//                    touch.delta.x = touchObj.pageX - touch.start.x;
-//                });
-//
-//                this.addEventListener('touchend', function(e){
-//                    window.cancelAnimationFrame(requestId);
-//                    $('.viewport').addClass('animated');
-//                });
+                nav = $('.content');
 
-                $('.menu-trigger').click(function(e){
-                    e.preventDefault();
-                    $('.viewport').toggleClass('navigation-active');
+                this.addEventListener('touchstart', function(e) {
+
+                    var touchObj = e.changedTouches[0];
+
+                    if (touchObj.identifier == 0) {
+                        navigationMoved = false;
+                        touch.start.x = touchObj.pageX;
+                        touch.start.y = touchObj.pageY;
+                        navStart = nav.position().left;
+
+                        requestAnimationFrame(listenForDeltaChange);
+                        $('body').removeClass('animated');
+                    }
+
+
                 });
+
+                this.addEventListener('touchmove', function(e){
+
+                    var touchObj = e.changedTouches[0];
+                    touch.delta.x = touchObj.pageX - touch.start.x;
+                    touch.delta.y = touchObj.pageY - touch.start.y;
+
+                    if (slidingMenu == false && Math.abs(touch.delta.x) > Math.abs(touch.delta.y)) {
+                        e.preventDefault();
+                    } else {
+                        finishNavigationOpen();
+                    }
+                });
+
+                this.addEventListener('touchend', function(e){
+
+                    if (e.changedTouches[0].identifier == 0) {
+                        finishNavigationOpen();
+                    }
+
+                });
+
+                function finishNavigationOpen()
+                {
+                    slidingMenu = false;
+
+                    window.cancelAnimationFrame(requestId);
+                    $('body').addClass('animated');
+
+                    if (navigationMoved) {
+                        var css = {left: 0};
+                        if (touch.delta.x > 0) {
+                            css = {left: navSize};
+                        }
+
+                        nav.css(css);
+                    }
+
+
+                    navigationMoved = false;
+                }
+
+                window.addEventListener('orientationchange', function(e){
+                    finishNavigationOpen();
+                });
+
+                setTimeout(function(){
+                    $('.flash-messages').fadeOut('slow');
+                }, 3000);
+
+
             });
+
+
         </script>
     </body>
 </html>

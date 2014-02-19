@@ -50,4 +50,44 @@ class ClientsService
         );
     }
 
+    /**
+     * @param $page
+     * @return \Knp\Component\Pager\Pagination\PaginationInterface
+     */
+    public function getInClubList($page)
+    {
+        return $this->paginator->paginate(
+            $this->clientRepository->getInClubListQuery(),
+            $page,
+            $this->pageSize
+        );
+    }
+
+    /**
+     * @param $page
+     * @return \Knp\Component\Pager\Pagination\PaginationInterface
+     */
+    public function getActiveList($page)
+    {
+        $queryBuilder = $this->clientRepository->getActiveListQuery();
+        return $this->paginator->paginate(
+            $queryBuilder,
+            $page,
+            $this->pageSize
+        );
+    }
+
+    /**
+     * @param $clientCode
+     * @return Client[]
+     */
+    public function getListByClientCode($clientCode)
+    {
+        return $this->clientRepository->getActiveListQuery()
+            ->andWhere('c.code LIKE :code')
+            ->setParameter('code', '%'.$clientCode.'%')
+            ->getQuery()
+            ->execute();
+    }
+
 } 

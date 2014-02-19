@@ -24,7 +24,7 @@ class Visit
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="day", type="date", nullable=false)
+     * @ORM\Column(name="`day`", type="date", nullable=false)
      */
     private $day;
 
@@ -38,7 +38,7 @@ class Visit
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="exit", type="time", nullable=true)
+     * @ORM\Column(name="`exit`", type="time", nullable=true)
      */
     private $exit;
 
@@ -51,6 +51,13 @@ class Visit
      * })
      */
     private $client;
+
+    public function __construct()
+    {
+        $this->day = new \DateTime();
+        $this->enter = new \DateTime();
+
+    }
 
     /**
      * @return \DateTime
@@ -93,4 +100,37 @@ class Visit
 
         return $diff->format(implode(' ', $format));
     }
+
+    public function isActive()
+    {
+        return empty($this->exit);
+    }
+
+    /**
+     * @param \Gym\Bundle\Entity\Client $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
+
+    /**
+     * @param \DateTime $exit
+     */
+    public function setExit($exit)
+    {
+        $this->exit = $exit;
+    }
+
+    /**
+     * @return \Gym\Bundle\Entity\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    
+
 }

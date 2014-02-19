@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}
-    {#{{ client|fullname }} :: {% block title_addition %}{% endblock %}#}
+{% block page_title %}
+    {{ client|fullname }}
 {% endblock %}
 
 {% set navigationItems = [
@@ -22,6 +22,12 @@
         pathParams: {id: client.id},
         icon: "credit-card",
         title: "Subscriptions"
+    },
+    {
+        path: "client_subscriptions",
+        pathParams: {id: client.id},
+        icon: "pencil",
+        title: "Edit"
     }
 ] %}
 

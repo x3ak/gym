@@ -57,12 +57,12 @@ class VisitsService
 
     public function create(Client $client)
     {
-
+        $this->visitRepository->createVisit($client);
     }
 
-    public function finish(Visit $visit)
+    public function finish(Client $client)
     {
-
+        $this->visitRepository->finishVisit($client);
     }
 
 } 

@@ -23,6 +23,33 @@ class VisitRepository extends EntityRepository
             ->select('v')
             ->from('GymBundle:Visit', 'v')
             ->where('v.client = :client')
+            ->orderBy('v.day, v.enter', 'desc')
             ->setParameter('client', $client);
+    }
+
+    public function createVisit(Client $client)
+    {
+        $entity = new Visit();
+        $entity->setClient($client);
+        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+    }
+
+    public function finishVisit(Client $client)
+    {
+
+        /** @var Visit[] $list */
+        $list = $this->getByClient($client)
+            ->andWhere('v.exit is null')
+            ->getQuery()
+            ->execute();
+
+        foreach ($list as $visit) {
+            $visit->setExit(new \DateTime());
+            $this->getEntityManager()->persist($visit);
+
+        }
+
+        $this->getEntityManager()->flush();
     }
 }

@@ -1,5 +1,27 @@
 {% extends '::base.html.twig' %}
 
+{% block page_title %}
+    {{ "Clients"|trans }}
+{% endblock %}
+
+{% set navigationItems = [
+{
+path: "clients_list_all",
+icon: "users",
+title: "All"
+},
+{
+path: "clients_list_active",
+icon: "check",
+title: "Active"
+},
+{
+path: "clients_list_in_club",
+icon: "check-square-o",
+title: "In the Club"
+}
+] %}
+
 {% block content %}
     <div class="filter">
         {% block filter %}
@@ -17,10 +39,26 @@
         </thead>
         <tbody>
         {% for client in clients %}
+            {% set isActive = client.subscription is not null %}
+            {% set inClub = isActive and client.activeVisit %}
+
         <tr>
-            <td>{{ client.code }}</td>
-            <td>{{ client|fullname }}</td>
-            <td><a href="{{ path("client_dashboard", {id: client.id}) }}">View</a> </td>
+            <td><a href="{{ path("client_dashboard", {id: client.id}) }}">{{ client.code }}</a></td>
+            <td>
+                <a href="{{ path("client_dashboard", {id: client.id}) }}">{{ client|fullname }}</a>
+                {% if inClub %}
+                    <span class="badge badge-important">In</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if client.subscription %}
+                    {% if inClub %}
+                        <a href="{{ path("visit_finish", {id: client.id}) }}">Finish visit</a>
+                        {% else %}
+                        <a href="{{ path("visit_start", {id: client.id}) }}">Start visit</a>
+                    {% endif %}
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
 
