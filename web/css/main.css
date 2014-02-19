@@ -1,41 +1,24 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic);
-table.list {
-  border-collapse: collapse;
-  width: 100%;
-  background-color: white;
+.badge {
+  padding: 3px 9px;
+  font-size: 11px;
+  text-shadow: none;
+  background-color: #D1DADE;
+  font-weight: 600;
+  color: #5E5E5E;
+  text-transform: uppercase;
 }
-table.list thead tr th {
-  border-bottom: 1px solid silver;
-  line-height: 30px;
-  text-align: left;
-  padding: 2px 5px;
+.badge.badge-important {
+  background-color: #f35958;
+  color: #fff;
 }
-table.list thead tr th.code {
-  width: 60px;
+.badge.badge-success {
+  background-color: #0aa699;
+  color: #fff;
 }
-table.list thead tr th.short-date {
-  width: 110px;
-}
-table.list thead tr th.time {
-  width: 80px;
-}
-table.list tbody tr:nth-child(odd) td {
-  background-color: #fafafa;
-}
-table.list tbody tr td {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  border-bottom: 1px solid silver;
-  line-height: 30px;
-  text-align: left;
-  padding: 2px 5px;
-}
-table.list tbody tr td:first-child {
-  padding-left: 5px;
-}
-table.list tbody tr td:last-child {
-  padding-right: 5px;
+.badge.badge-default {
+  background-color: #9AA2A5;
+  color: #fff;
 }
 .dashboard {
   display: flex;
@@ -59,6 +42,40 @@ table.list tbody tr td:last-child {
   .dashboard div.item:last-child {
     margin-right: 0;
   }
+}
+.flash-messages {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.flash-messages div.flash-notice {
+  color: white;
+  background-color: #0aa699;
+  border: 1px solid #098e83;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-top: 10px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+ul.info li {
+  display: flex;
+  flex-direction: row;
+  line-height: 25px;
+}
+ul.info li > div:first-child {
+  font-weight: 600;
+  width: 100px;
+  text-align: right;
+  padding-right: 10px;
+}
+ul.info li > div:nth-child(2) span.silver {
+  font-weight: 300;
+  font-size: 0.9em;
 }
 .main-navigation {
   -webkit-touch-callout: none;
@@ -152,6 +169,75 @@ table.list tbody tr td:last-child {
   background-color: #F3F6F9;
   font-weight: 600;
 }
+.clients-search {
+  margin-top: 10px;
+  padding: 0 10px;
+  position: relative;
+}
+.clients-search .fa-spinner {
+  top: 5px;
+  right: 15px;
+  font-size: 1.2em;
+  position: absolute;
+}
+.clients-search li {
+  margin-top: 10px;
+}
+.clients-search li a {
+  background-color: #0aa699;
+  color: white !important;
+  border-radius: 3px;
+}
+.clients-search li a span {
+  font-size: 0.6em;
+}
+.clients-search li a:hover {
+  background-color: #098e83;
+}
+.clients-search li a.finish {
+  background-color: #f35958;
+}
+.clients-search li a.finish:hover {
+  background-color: #f14140;
+}
+table.list {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+}
+table.list thead tr th {
+  border-bottom: 1px solid silver;
+  line-height: 30px;
+  text-align: left;
+  padding: 2px 5px;
+}
+table.list thead tr th.code {
+  width: 60px;
+}
+table.list thead tr th.short-date {
+  width: 110px;
+}
+table.list thead tr th.time {
+  width: 80px;
+}
+table.list tbody tr:nth-child(odd) td {
+  background-color: #fafafa;
+}
+table.list tbody tr td {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  border-bottom: 1px solid silver;
+  line-height: 30px;
+  text-align: left;
+  padding: 2px 5px;
+}
+table.list tbody tr td:first-child {
+  padding-left: 5px;
+}
+table.list tbody tr td:last-child {
+  padding-right: 5px;
+}
 h1,
 h2,
 h3,
@@ -227,85 +313,4 @@ body.animated .viewport .content {
     width: auto !important;
     right: 0;
   }
-}
-.badge {
-  padding: 3px 9px;
-  font-size: 11px;
-  text-shadow: none;
-  background-color: #D1DADE;
-  font-weight: 600;
-  color: #5E5E5E;
-  text-transform: uppercase;
-}
-.badge-important {
-  background-color: #f35958;
-  color: #fff;
-}
-.badge-success {
-  background-color: #0aa699;
-  color: #fff;
-}
-.clients-search {
-  margin-top: 10px;
-  padding: 0 10px;
-  position: relative;
-}
-.clients-search .fa-spinner {
-  top: 5px;
-  right: 15px;
-  font-size: 1.2em;
-  position: absolute;
-}
-.clients-search li {
-  margin-top: 10px;
-}
-.clients-search li a {
-  background-color: #0aa699;
-  color: white !important;
-  border-radius: 3px;
-}
-.clients-search li a span {
-  font-size: 0.6em;
-}
-.clients-search li a:hover {
-  background-color: #098e83;
-}
-.clients-search li a.finish {
-  background-color: #f35958;
-}
-.clients-search li a.finish:hover {
-  background-color: #f14140;
-}
-.flash-messages {
-  z-index: 3;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-}
-.flash-messages div.flash-notice {
-  color: white;
-  background-color: #0aa699;
-  border: 1px solid #098e83;
-  padding: 5px 10px;
-  border-radius: 3px;
-  margin-top: 10px;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-}
-ul.info li {
-  display: flex;
-  flex-direction: row;
-}
-ul.info li > div:first-child {
-  font-weight: 600;
-  width: 100px;
-  text-align: right;
-  padding-right: 10px;
-}
-ul.info li > div:nth-child(2) span.silver {
-  font-weight: 300;
-  font-size: 0.9em;
 }

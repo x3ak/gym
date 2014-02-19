@@ -4,6 +4,9 @@
     <div class="dashboard">
         <div class="item">
             <h4>{{"General Info"|trans}}</h4>
+            <div class="client-photo">
+                <img src="/photo/{{client.id}}.jpg" />
+            </div>
             <ul class="info">
                 <li>
                     <div>{{ "Code"|trans }}:</div>
@@ -37,6 +40,8 @@
                         <span class="badge badge-important">{{ "In the Club"|trans }}</span>
                         {% elseif client.active %}
                         <span class="badge badge-success">{{ "Active"|trans }}</span>
+                        {% else %}
+                        <span class="badge badge-default">{{ "Inactive"|trans }}</span>
                         {% endif %}
                     </div>
                 </li>

@@ -1,0 +1,37 @@
+.clients-search {
+    margin-top: 10px;
+    padding: 0 10px;
+    position: relative;
+
+    .fa-spinner {
+        top: 5px;
+        right: 15px;
+        font-size: 1.2em;
+        position: absolute;
+    }
+
+    li {
+
+        margin-top: 10px;
+        a {
+            background-color: @color-green;
+            color: white !important;
+            border-radius: 3px;
+
+            span {
+                font-size: 0.6em;
+            }
+
+            &:hover {
+                background-color: @color-green-hover;
+            }
+
+            &.finish {
+                background-color: @color-red;
+                &:hover {
+                    background-color: @color-red-hover;
+                }
+            }
+        }
+    }
+}
