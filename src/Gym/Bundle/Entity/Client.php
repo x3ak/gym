@@ -137,7 +137,45 @@ class Client
                 return $visit;
             }
         }
-
     }
+
+    /**
+     * @return bool
+     */
+    public function isActive()
+    {
+        return !empty($this->getSubscription());
+    }
+
+    public function isInTheClub()
+    {
+        return !empty($this->getActiveVisit());
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+
 
 }

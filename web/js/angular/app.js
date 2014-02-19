@@ -24,7 +24,7 @@ var app = angular.module('gymApp', [])
         function doRequest() {
             $scope.state.inProgress = true;
             $http({
-                url: '/app_dev.php/clients/search.json',
+                url: routes.clients_search,
                 method: "GET",
                 params: {code: $scope.clientCode}
             }).success(function(data) {

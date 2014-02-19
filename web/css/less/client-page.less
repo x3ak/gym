@@ -1,31 +1,28 @@
-.client-page {
-    .info {
-        display: flex;
+.dashboard {
+    display: flex;
+    flex-flow: row wrap;
 
-        .avatar {
-            width: 100px;
-        }
-        div {
-            border: 1px solid red;
-        }
+    div.item {
+        box-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+        background-color: white;
+        padding: 10px;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 100%;
     }
+}
 
-    .view {
-        ul.navigation {
-            display: flex;
-            margin: 0;
-            padding: 0;
-            li {
-                list-style: none;
+@media @desktop {
+    .dashboard {
+        div.item {
+            width: 25%;
+            min-width: 490px;
+            margin-right: 0;
 
-                a {
-                    padding: 2px 4px;
-                }
+            &:last-child {
+                margin-right: 0;
             }
-        }
-
-        .view-content {
-//            padding: 2px 4px;
         }
     }
 }

@@ -6,7 +6,9 @@
 @import "navigation";
 @import "pagination";
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic);
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
@@ -53,7 +55,10 @@ ul {
     }
 }
 
-* { box-sizing: border-box }
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
 
 .container {
 //    overflow: hidden;
@@ -91,9 +96,14 @@ body.animated {
 }
 
 @media @desktop {
-    .viewport .content {
-        left: @main-navigation-width !important;
-        box-shadow: none !important;
+    .viewport {
+        .content {
+            left: @main-navigation-width !important;
+            box-shadow: none !important;
+
+            width: auto !important;
+            right: 0;
+        }
     }
 }
 
@@ -121,6 +131,7 @@ body.animated {
 
 
 .clients-search {
+    margin-top: 10px;
     padding: 0 10px;
     position: relative;
 
@@ -177,5 +188,28 @@ body.animated {
         border-radius: 3px;
         margin-top: 10px;
         box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+    }
+}
+
+
+
+ul.info {
+    li {
+        display: flex;
+        flex-direction: row;
+
+        > div:first-child {
+            font-weight: 600;
+            width: 100px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        > div:nth-child(2) {
+            span.silver {
+                font-weight: 300;
+                font-size: 0.9em;
+            }
+        }
     }
 }

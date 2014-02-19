@@ -82,11 +82,15 @@ class Visit
 
     public function getDuration()
     {
+        $ongoing = false;
         if (is_null($this->exit)) {
-            return null;
+            $exit = new \DateTime();
+            $ongoing = true;
+        } else {
+            $exit = $this->exit;
         }
 
-        $diff = $this->enter->diff($this->exit);
+        $diff = $this->enter->diff($exit);
 
         $format = [];
 
@@ -95,7 +99,11 @@ class Visit
         }
 
         if ($diff->i > 0) {
-            $format[] = '%Im';
+            $format[] = '%im';
+        }
+
+        if (count($format) == 0) {
+            return '< 1m';
         }
 
         return $diff->format(implode(' ', $format));
@@ -131,6 +139,6 @@ class Visit
         return $this->client;
     }
 
-    
+
 
 }

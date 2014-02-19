@@ -1,7 +1,5 @@
 {% extends '@Gym/Client/show.html.twig' %}
-{% block title_addition %}
-    {{ "Visits"|trans }}
-{% endblock %}
+
 {% block client_view %}
     {% embed '::listing.html.twig' %}
         {% block listing_head %}
@@ -18,16 +16,16 @@
                 <tr>
                     <td>{{ visit.day.format('j M y') }}</td>
                     <td>{{ visit.enter.format('H:i') }}</td>
-                    {% if visit.exit %}
-                        <td>{{ visit.exit.format('H:i') }}</td>
-                    {% else %}
+                    {% if visit.active %}
                         <td><span class="badge badge-important">{{ "In the Club"|trans }}</span></td>
+                    {% else %}
+                        <td>{{ visit.exit.format('H:i') }}</td>
                     {% endif %}
                     <td class="duration">
-                        {% if visit.exit %}
-                            {{ visit.duration }}
-                        {% else %}
+                        {% if visit.active %}
                             <a href="{{ path("visit_finish", {id: visit.client.id}) }}">Finish visit</a>
+                        {% else %}
+                            {{ visit.duration }}
                         {% endif %}
                     </td>
                 </tr>

@@ -85,6 +85,11 @@ services:
         tags:
             - { name: twig.extension }
 
+    gym.twig.duration_extension:
+        class: Gym\Bundle\Twig\DurationExtension
+        tags:
+            - { name: twig.extension }
+
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
         tags:

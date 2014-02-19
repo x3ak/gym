@@ -26,7 +26,11 @@ class ClientController extends Controller
      */
     public function dashboardAction(Client $client)
     {
-        return ['client' => $client];
+        $total = $this->get('gym.repository.visit')->getTotalInfo($client);
+        return [
+            'client' => $client,
+            'total' => $total
+        ];
     }
 
     /**
@@ -53,11 +57,20 @@ class ClientController extends Controller
     }
 
     /**
-     * @Route("/{id}/subscriptions", name="client_subscriptions")
+     * @Route("/{id}/edit", name="client_edit")
      * @Template
      */
     public function editAction(Client $client)
     {
         return ['client' => $client];
+    }
+
+    /**
+     * @Route("/create", name="client_create")
+     * @Template
+     */
+    public function createAction()
+    {
+        return [];
     }
 } 

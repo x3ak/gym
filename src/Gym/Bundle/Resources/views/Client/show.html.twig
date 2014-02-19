@@ -24,7 +24,7 @@
         title: "Subscriptions"
     },
     {
-        path: "client_subscriptions",
+        path: "client_edit",
         pathParams: {id: client.id},
         icon: "pencil",
         title: "Edit"
@@ -34,9 +34,8 @@
 
 {% block content %}
     <div class="client-page">
-
         <div class="view">
-            <div class="view-content">
+            <div class="{{ viewContentClass|default("view-content") }}">
             {% block client_view %}
 
             {% endblock %}

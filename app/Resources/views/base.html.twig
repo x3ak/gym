@@ -13,7 +13,7 @@
 
         <script type="text/javascript">
             var routes = {
-                clients_search: '/clients/search.json'
+                clients_search: '{{ path("clients_search" )}}'
             };
 
         </script>
@@ -30,7 +30,6 @@
         {% block body %}
             <div class="container">
 
-                {{ dump(app.session.flashbag) }}
                 <div class="flash-messages">
                     {% for flashMessage in app.session.flashbag.get('notice') %}
                         <div class="flash-notice">
@@ -46,17 +45,10 @@
                             <li class="active"><a href="{{ path('dashboard') }}"><i class="fa fa-home"></i>{{ "Dashboard"|trans }}</a></li>
                             <li><a href="{{ path('clients_list_active') }}"><i class="fa fa-users"></i>{{ "Clients"|trans }}</a></li>
                         </ul>
-                        <div class="menu-section">Reports</div>
-                        <ul>
-                            <li><a href="javascript:;"><i class="fa fa-clipboard"></i>In club</a></li>
-                            <li><a href="javascript:;"><i class="fa fa-clipboard"></i>In club</a></li>
-                        </ul>
-
 
                         <div class="menu-section">Start/End visit</div>
                         <div class="clients-search" ng-controller="clientsSearchController">
                             <input type="text" name="client-code" placeholder="{{ "Client Code"|trans }}"
-                                   ng-disabled="state.inProgress"
                                    ng-model="clientCode" />
 
                             <i class="fa fa-spinner fa-spin" ng-show="state.inProgress"></i>

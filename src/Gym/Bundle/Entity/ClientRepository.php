@@ -18,7 +18,7 @@ class ClientRepository extends EntityRepository
     public function getListQuery()
     {
         return $this->getEntityManager()->createQueryBuilder()
-            ->select('c, s')
+            ->select('c, s, v')
             ->from('GymBundle:Client', 'c')
             ->leftJoin('c.subscription', 's') // add this join to base query to avoid lazy loading on list displaying
             ->leftJoin('c.visits', 'v') // add this join to base query to avoid lazy loading on list displaying
@@ -32,7 +32,7 @@ class ClientRepository extends EntityRepository
     public function getActiveListQuery()
     {
         return $this->getEntityManager()->createQueryBuilder()
-            ->select('c, s')
+            ->select('c, s, v')
             ->from('GymBundle:Client', 'c')
             ->innerJoin('c.subscription', 's')
             ->leftJoin('c.visits', 'v')
@@ -46,7 +46,7 @@ class ClientRepository extends EntityRepository
     public function getInClubListQuery()
     {
         return $this->getEntityManager()->createQueryBuilder()
-            ->select('c, s')
+            ->select('c, s, v')
             ->from('GymBundle:Client', 'c')
             ->innerJoin('c.subscription', 's')
             ->innerJoin('c.visits', 'v', 'WITH', 'v.exit is null')

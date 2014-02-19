@@ -1,8 +1,77 @@
 {% extends '@Gym/Client/show.html.twig' %}
-{% block page_title %}
-    {{ "Dashboard"|trans }}
-{% endblock %}
 
 {% block client_view %}
-    Dashboard
+    <div class="dashboard">
+        <div class="item">
+            <h4>{{"General Info"|trans}}</h4>
+            <ul class="info">
+                <li>
+                    <div>{{ "Code"|trans }}:</div>
+                    <div>{{ client.code }}</div>
+                </li>
+                <li>
+                    <div>{{ "First Name"|trans }}:</div>
+                    <div>{{ client.firstName }}</div>
+                </li>
+                <li>
+                    <div>{{ "Last Name"|trans }}:</div>
+                    <div>{{ client.lastName }}</div>
+                </li>
+                <li>
+                    <div>{{ "Birth date"|trans }}:</div>
+                    <div>{{ client.birthdate.format('j M y') }}</div>
+                </li>
+                <li>
+                    <div>{{ "Email"|trans }}:</div>
+                    <div>{{ client.email }}</div>
+                </li>
+                <li>
+                    <div>{{ "Phone"|trans }}:</div>
+                    <div>{{ client.phone }}</div>
+                </li>
+
+                <li>
+                    <div>{{ "Status"|trans }}:</div>
+                    <div>
+                        {% if client.inTheClub %}
+                        <span class="badge badge-important">{{ "In the Club"|trans }}</span>
+                        {% elseif client.active %}
+                        <span class="badge badge-success">{{ "Active"|trans }}</span>
+                        {% endif %}
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="item">
+            <h4>{{"Visits Total"|trans}}</h4>
+            <ul class="info">
+                <li>
+                    <div>{{ "Count"|trans }}:</div>
+                    <div>{{ total.count }}</div>
+                </li>
+                <li>
+                    <div>{{ "Duration"|trans }}:</div>
+                    <div>{{ total.duration|duration }}</div>
+                </li>
+                <li>
+                    <div>{{ "Longest"|trans }}:</div>
+                    <div>{{ total.longest.duration }} <span class="silver">at {{ total.longest.day.format('j M y') }}</span></div>
+                </li>
+                <li>
+                    <div>{{ "Shortest"|trans }}:</div>
+                    <div>{{ total.shortest.duration }} <span class="silver">at {{ total.shortest.day.format('j M y') }}</span></div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <h4>{{"Subscription"|trans}}</h4>
+            <p>Info about current subscription</p>
+            <p>If not subscribed show subscribe form</p>
+        </div>
+
+
+    </div>
 {% endblock %}

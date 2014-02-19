@@ -1,7 +1,8 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic);
 table.list {
   border-collapse: collapse;
   width: 100%;
+  background-color: white;
 }
 table.list thead tr th {
   border-bottom: 1px solid silver;
@@ -19,7 +20,7 @@ table.list thead tr th.time {
   width: 80px;
 }
 table.list tbody tr:nth-child(odd) td {
-  background-color: #ececec;
+  background-color: #fafafa;
 }
 table.list tbody tr td {
   text-overflow: ellipsis;
@@ -36,25 +37,28 @@ table.list tbody tr td:first-child {
 table.list tbody tr td:last-child {
   padding-right: 5px;
 }
-.client-page .info {
+.dashboard {
   display: flex;
+  flex-flow: row wrap;
 }
-.client-page .info .avatar {
-  width: 100px;
+.dashboard div.item {
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100%;
 }
-.client-page .info div {
-  border: 1px solid red;
-}
-.client-page .view ul.navigation {
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-.client-page .view ul.navigation li {
-  list-style: none;
-}
-.client-page .view ul.navigation li a {
-  padding: 2px 4px;
+@media only screen and (min-width: 768px) {
+  .dashboard div.item {
+    width: 25%;
+    min-width: 490px;
+    margin-right: 0;
+  }
+  .dashboard div.item:last-child {
+    margin-right: 0;
+  }
 }
 .main-navigation {
   -webkit-touch-callout: none;
@@ -67,8 +71,9 @@ table.list tbody tr td:last-child {
   overflow-y: auto;
 }
 .main-navigation .menu-section {
-  color: white;
-  text-align: center;
+  color: #a9abb4;
+  background-color: #22262e;
+  padding: 5px 10px;
 }
 .main-navigation ul {
   display: flex;
@@ -191,6 +196,7 @@ ul li {
 }
 * {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 .container .viewport > div {
   position: fixed;
@@ -218,6 +224,8 @@ body.animated .viewport .content {
   .viewport .content {
     left: 250px !important;
     box-shadow: none !important;
+    width: auto !important;
+    right: 0;
   }
 }
 .badge {
@@ -238,6 +246,7 @@ body.animated .viewport .content {
   color: #fff;
 }
 .clients-search {
+  margin-top: 10px;
   padding: 0 10px;
   position: relative;
 }
@@ -285,4 +294,18 @@ body.animated .viewport .content {
   border-radius: 3px;
   margin-top: 10px;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+ul.info li {
+  display: flex;
+  flex-direction: row;
+}
+ul.info li > div:first-child {
+  font-weight: 600;
+  width: 100px;
+  text-align: right;
+  padding-right: 10px;
+}
+ul.info li > div:nth-child(2) span.silver {
+  font-weight: 300;
+  font-size: 0.9em;
 }
