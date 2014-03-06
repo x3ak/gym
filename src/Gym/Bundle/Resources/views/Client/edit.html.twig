@@ -1,7 +1,15 @@
 {% extends '@Gym/Client/show.html.twig' %}
+
 {% block title_addition %}
     {{ "Edit"|trans }}
 {% endblock %}
-{% block client_view %}
 
+{% block client_view %}
+    <div class="dashboard" style="flex-flow: column">
+        <div class="item">
+            <h4>{{"General Info"|trans}}</h4>
+            {{ form(form) }}
+            </ul>
+        </div>
+    </div>
 {% endblock %}

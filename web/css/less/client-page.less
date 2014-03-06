@@ -13,6 +13,21 @@
     }
 }
 
+#new_client {
+    > div {
+        margin-bottom: 10px;
+        display: flex;
+        label {
+            width: 150px;
+        }
+
+
+        > *:nth-child(2) {
+            width: 70%;
+        }
+    }
+}
+
 @media @desktop {
     .dashboard {
         div.item {
@@ -23,6 +38,7 @@
             &:last-child {
                 margin-right: 0;
             }
+
         }
     }
 }

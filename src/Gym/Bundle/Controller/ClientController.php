@@ -8,9 +8,11 @@
 namespace Gym\Bundle\Controller;
 
 use Gym\Bundle\Entity\Client;
+use Gym\Bundle\Form\Type\NewClientType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ClientController
@@ -60,17 +62,38 @@ class ClientController extends Controller
      * @Route("/{id}/edit", name="client_edit")
      * @Template
      */
-    public function editAction(Client $client)
+    public function editAction(Request $request, Client $client)
     {
-        return ['client' => $client];
+        $form = $this->createForm(new NewClientType(), $client);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Client was successfully saved'
+            );
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($client);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('client_dashboard', ['id' => $client->getId()]));
+        }
+
+        return [
+            'form' => $form->createView(),
+            'client' => $client
+        ];
     }
 
     /**
      * @Route("/create", name="client_create")
      * @Template
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
-        return [];
+        $client = new Client();
+        return $this->editAction($request, $client);
     }
 } 

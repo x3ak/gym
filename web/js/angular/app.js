@@ -5,6 +5,7 @@ var app = angular.module('gymApp', [])
         var timer;
         $scope.state = { inProgress: false };
         $scope.clientCode = '';
+        $scope.showResults = false;
 
         $scope.$watch('clientCode', function(){
             searchClients();
@@ -26,7 +27,10 @@ var app = angular.module('gymApp', [])
             $http({
                 url: routes.clients_search,
                 method: "GET",
-                params: {code: $scope.clientCode}
+                params: {
+                    code: $scope.clientCode,
+                    maxResults: 3
+                }
             }).success(function(data) {
                 $scope.clients = data;
                 $scope.state.inProgress = false;

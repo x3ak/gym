@@ -77,5 +77,78 @@ class SubscriptionType
      */
     private $visitsPerWeek;
 
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDurationUnit()
+    {
+        return $this->durationUnit;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEnterTime()
+    {
+        return $this->enterTime;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getExitTime()
+    {
+        return $this->exitTime;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getVisitsPerWeek()
+    {
+        return $this->visitsPerWeek;
+    }
+
+
 
 }

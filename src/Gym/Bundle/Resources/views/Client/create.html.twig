@@ -7,47 +7,7 @@
     <div class="dashboard" style="flex-flow: column">
         <div class="item">
             <h4>{{"General Info"|trans}}</h4>
-            <ul class="info">
-                <li>
-                    <div>First Name</div>
-                    <div><input type="text" name="firstname" /></div>
-                </li>
-                <li>
-                    <div>Last Name</div>
-                    <div><input type="text" name="lastname" /></div>
-                </li>
-                <li>
-                    <div>Gender</div>
-                    <div>
-                        <input name="gender" type="radio" value="M"/> M
-                        <input name="gender" type="radio" value="F"/> F
-                    </div>
-                </li>
-                <li>
-                    <div>Birth Date</div>
-                    <div>
-                        <select>
-                            <option>dd</option>
-                        </select>
-                        <select>
-                            <option>mm</option>
-                        </select>
-                        <select>
-                            <option>yyyy</option>
-                        </select>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="item">
-            <h4>{{"Subscription"|trans}}</h4>
-            <ul class="info">
-                <li>
-                    <div>Type</div>
-                    <div><select name="type" id="">
-                            <option value="0">Choose subscription type</option>
-                        </select></div>
-                </li>
+            {{ form(form) }}
             </ul>
         </div>
     </div>

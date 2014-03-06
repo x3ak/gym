@@ -3,12 +3,15 @@
 namespace Gym\Bundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Client
  *
  * @ORM\Table(name="client", uniqueConstraints={@ORM\UniqueConstraint(name="code_UNIQUE", columns={"code"})}, indexes={@ORM\Index(name="fk_client_subscription1_idx", columns={"subscription_id"})})
  * @ORM\Entity(repositoryClass="Gym\Bundle\Entity\ClientRepository")
+ * @UniqueEntity(fields="code", message="Code already taken")
  */
 class Client
 {
@@ -25,6 +28,7 @@ class Client
      * @var integer
      *
      * @ORM\Column(name="code", type="integer", nullable=false)
+     * @Assert\NotBlank()
      */
     private $code;
 
@@ -32,6 +36,7 @@ class Client
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=64, nullable=false)
+     * @Assert\NotBlank()
      */
     private $firstName;
 
@@ -39,29 +44,31 @@ class Client
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=64, nullable=false)
+     * @Assert\NotBlank()
      */
     private $lastName;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthdate", type="datetime", nullable=false)
+     * @ORM\Column(name="birthday", type="datetime", nullable=false)
+     * @Assert\NotBlank()
      */
-    private $birthdate;
+    private $birthday;
 
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=128, nullable=true)
      */
-    private $email;
+    private $email = null;
 
     /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=35, nullable=true)
      */
-    private $phone;
+    private $phone = null;
 
     /**
      * @var Subscription
@@ -155,9 +162,9 @@ class Client
     /**
      * @return \DateTime
      */
-    public function getBirthdate()
+    public function getBirthday()
     {
-        return $this->birthdate;
+        return $this->birthday;
     }
 
     /**
@@ -175,6 +182,63 @@ class Client
     {
         return $this->phone;
     }
+
+    /**
+     * @param \DateTime $birthday
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+    }
+
+    /**
+     * @param int $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
 
 
 

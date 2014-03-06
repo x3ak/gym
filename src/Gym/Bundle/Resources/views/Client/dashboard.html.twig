@@ -5,7 +5,7 @@
         <div class="item">
             <h4>{{"General Info"|trans}}</h4>
             <div class="client-photo">
-                <img src="/photo/{{client.id}}.jpg" />
+                {#<img src="/photos/{{client.id}}.jpg" />#}
             </div>
             <ul class="info">
                 <li>
@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <div>{{ "Birth date"|trans }}:</div>
-                    <div>{{ client.birthdate.format('j M y') }}</div>
+                    <div>{{ client.birthday.format('j M y') }}</div>
                 </li>
                 <li>
                     <div>{{ "Email"|trans }}:</div>
@@ -52,6 +52,7 @@
         <div class="item">
             <h4>{{"Visits Total"|trans}}</h4>
             <ul class="info">
+
                 <li>
                     <div>{{ "Count"|trans }}:</div>
                     <div>{{ total.count }}</div>
@@ -60,20 +61,47 @@
                     <div>{{ "Duration"|trans }}:</div>
                     <div>{{ total.duration|duration }}</div>
                 </li>
+                {% if total.longest is defined %}
                 <li>
                     <div>{{ "Longest"|trans }}:</div>
                     <div>{{ total.longest.duration }} <span class="silver">at {{ total.longest.day.format('j M y') }}</span></div>
                 </li>
+                {% endif %}
+                {% if total.shortest is defined %}
                 <li>
                     <div>{{ "Shortest"|trans }}:</div>
                     <div>{{ total.shortest.duration }} <span class="silver">at {{ total.shortest.day.format('j M y') }}</span></div>
                 </li>
+                {% endif %}
             </ul>
         </div>
 
         <div class="item">
             <h4>{{"Subscription"|trans}}</h4>
-            <p>Info about current subscription</p>
+            {% if client.active %}
+                <p>{{ client.subscription.subscriptionType.title }}</p>
+                <ul class="info">
+                    <li>
+                        <div>Start</div>
+                        <div>{{ client.subscription.startDate.format('j M y') }}</div>
+                    </li>
+                    <li>
+                        <div>End</div>
+                        <div>{{ client.subscription.expireDate.format('j M y') }}</div>
+                    </li>
+                    <li>
+                        <div>Enter</div>
+                        <div>{{ client.subscription.subscriptionType.enterTime.format('H:i') }}</div>
+                    </li>
+                    <li>
+                        <div>Exit</div>
+                        <div>{{ client.subscription.subscriptionType.enterTime.format('H:i') }}</div>
+                    </li>
+                </ul>
+            {% else %}
+
+            {% endif %}
+
             <p>If not subscribed show subscribe form</p>
         </div>
 

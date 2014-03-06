@@ -66,6 +66,7 @@ class ClientsController extends Controller
     public function searchAction(Request $request)
     {
         $clientCode = $request->query->get('code');
+        $maxResults = $request->query->get('maxResults');
 
         $list = $this->getService()->getListByClientCode($clientCode);
 
@@ -73,7 +74,7 @@ class ClientsController extends Controller
         $count = 0;
 
         foreach ($list as $client) {
-            if ($count++ == 3)
+            if ($count++ == $maxResults)
                 break;
 
 

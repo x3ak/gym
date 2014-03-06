@@ -2,6 +2,7 @@
 @import "mixins";
 
 @import "badge";
+@import "buttons";
 @import "client-page";
 @import "flash-messages";
 @import "info-list";
@@ -10,9 +11,33 @@
 @import "search-widget";
 @import "table-list";
 
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Open Sans Light'), local('OpenSans-Light'), url(/css/fonts/light.woff) format('woff');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(/css/fonts/normal.woff) format('woff');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(/css/fonts/semibold.woff) format('woff');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(/css/fonts/bold.woff) format('woff');
+}
 
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic);
+//@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic);
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
